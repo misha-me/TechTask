@@ -11,7 +11,10 @@ public class MoveToCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // +-
         transform.Translate(Vector3.back * speed * Time.deltaTime);
+        //                         constant?
+        //                          \/
         if (transform.position.z < -10)
             Destroy(gameObject);
     }

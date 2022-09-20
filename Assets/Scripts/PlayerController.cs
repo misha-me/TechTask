@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public int playerMaterialIndex;
     private int playerScore;
-    private float playerSpeed = 0.5f;
+    private float playerSpeed = 0.5f; // const ?
     private int xBorder = 2;
 
     GameManager gameManager;
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(touch);
             if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
             {
+                // Extract calculation to the variable
                 transform.Translate(Vector3.right * touch.deltaPosition.x * Time.deltaTime * playerSpeed);
 
                 if (transform.position.x < -xBorder)
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Color Change"))
         {
+            // Code Style
             playerMaterialIndex = other.GetComponent<ColorChange>().materialIndex;
             GetComponent<Renderer>().material = gameManager.materials[playerMaterialIndex];
 
@@ -53,12 +55,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            // Code Style
             int otherMaterialIndex = other.gameObject.GetComponent<MoveToCamera>().materialIndex;
 
             if (otherMaterialIndex == playerMaterialIndex)
             {
+                // Magic numbers
                 if (playerScore < 10)
                 {
+                    //                                make const
+                    //                                    \/
                     transform.localScale += Vector3.one / 10;
                     playerScore++;
                 }
@@ -68,6 +74,8 @@ public class PlayerController : MonoBehaviour
                 if (playerScore != 0)
                 {
                     playerScore--;
+                    //                                make const
+                    //                                    \/
                     transform.localScale -= Vector3.one / 10;
                 }
                 else
